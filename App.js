@@ -1,4 +1,5 @@
 import React from 'react';
+import CourseList from './components/CourseList';
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
   
 const schedule = {
@@ -27,25 +28,7 @@ const schedule = {
   ]
 };
 
-const getCourseNumber = course => (
-  course.id.slice(1)
-);
 
-const Course = ({ course }) => (
-  <TouchableOpacity style={styles.courseButton}>
-    <Text style={styles.courseText}>
-      {`CS ${getCourseNumber(course)}\n${course.meets}`}
-    </Text>
-  </TouchableOpacity>
-);
-
-const CourseList = ({ courses }) => (
-  <ScrollView>
-    <View style={styles.courseList}>
-      { courses.map(course => <Course key={course.id} course={ course } />) }
-    </View>
-  </ScrollView>
-);
 
 const Banner = ({ title }) => (
   <Text style={styles.banner}>{ title }</Text>
@@ -77,22 +60,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'flex-start',
-  },
-  courseButton: {
-    borderRadius: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 10,
-    height: 60,
-    padding: 10,
-    minWidth: 90,
-    maxWidth: 90,
-    backgroundColor: '#66b0ff',
-  },
-  courseText:{
-    color: '#fff',
-    fontSize: 12,
-    textAlign: 'center',
   },
 });
 

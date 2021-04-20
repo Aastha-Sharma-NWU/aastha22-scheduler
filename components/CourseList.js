@@ -5,7 +5,7 @@ import TermSelector from './TermSelector'
 
 
 
-  const CourseList = ({courses}) => {
+const CourseList = ({courses, view}) => {
     const [selectedTerm, setSelectedTerm] = useState('Fall');
 
     const termCourses = courses.filter(course => selectedTerm === getCourseTerm(course));
@@ -15,7 +15,7 @@ import TermSelector from './TermSelector'
         <View style ={styles.container}>
             <TermSelector selectedTerm={selectedTerm} setSelectedTerm={setSelectedTerm} />
             <View style={styles.courseList}>
-            <CourseSelector courses={termCourses} />
+            <CourseSelector courses={termCourses} view={view} />
             </View>
         </View>
       </ScrollView>

@@ -1,42 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import CourseList from './components/CourseList';
-import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import ScheduleScreen from './screens/ScheduleScreen';
+import CourseDetailScreen from'./screens/CourseDetailScreen';
+
+const Stack = createStackNavigator();
+
+
+
+ 
+  const App = () => {
+    return (
+      <NavigationContainer>
+      <Stack.Navigator> 
+        <Stack.Screen name="ScheduleScreen"
+          component={ScheduleScreen}
+          options={{ title: 'Schedule'}} 
+        />
+        <Stack.Screen name="CourseDetailScreen"
+          component={CourseDetailScreen}
+          options={{ title: 'Course detail'}} 
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+    );
+  };
   
-
-
-const Banner = props => (
-  <Text style={styles.bannerStyle}>{props.title}</Text>
-);
-
-const App = () => {
-  const [schedule, setSchedule] = useState({ title: '', courses: [] });
-
-  const url = 'https://courses.cs.northwestern.edu/394/data/cs-courses.php';
-
-  useEffect(() => {
-    const fetchSchedule =  async () => {
-      const response = await fetch(url);
-      if (!response.ok) throw response;
-      const json = await response.json();
-      setSchedule(json);
-    }
-    fetchSchedule();
-  }, []);
-  return (
-    <SafeAreaView style={styles.container}>
-      <Banner title={schedule.title} />
-      <CourseList courses={schedule.courses} />
-    </SafeAreaView>
-  );
-};
-  
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 20,
-  }
-});
-
 export default App;
